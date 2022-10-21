@@ -1,0 +1,17 @@
+{
+    "icons": [
+      {
+        "src": "./assets/icons/icon_96x96.png",
+        "sizes": "96x96",
+        "type": "image/png"
+      }
+    ],
+    "name": "JATE Text Editor",
+    "short_name": "JATE",
+    "orientation": "portrait",
+    "display": "standalone",
+    "start_url": "./",
+    "description": "A simple text editor!",
+    "background_color": "#272822",
+    "theme_color": "#31a9e1"
+  }
