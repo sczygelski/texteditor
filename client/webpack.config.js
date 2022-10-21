@@ -19,13 +19,26 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './index.html'
+        template: './index.html',
+        title: 'webpack plugin'
       }),
       new WebpackPwaManifest({
-        
+        name: 'Text Editor',
+        start_url: '.',
+        publicPath: './',
+        fingerprints: false,
+        inject: true,
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96],
+            destination: path.join('assets', 'icons'),
+          }
+        ]
       }),
       new InjectManifest({
-
+        swSrc: './src/src-sw.js',
+        swDest: './dist/serviceworker.js'
       })
     ],
 
