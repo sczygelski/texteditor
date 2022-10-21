@@ -17,10 +17,38 @@ module.exports = () => {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
+    module: {
+      rules: [
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource' 
+        },
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env', { targets: "defaults" }]
+              ]
+            }
+          }
+        }
+      ],
+    },
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
         title: 'webpack plugin'
+      }),
+      new InjectManifest({
+        swSrc: './src/src-sw.js',
+        swDest: './dist/serviceworker.js'
       }),
       new WebpackPwaManifest({
         name: 'Text Editor',
@@ -35,17 +63,7 @@ module.exports = () => {
             destination: path.join('assets', 'icons'),
           }
         ]
-      }),
-      new InjectManifest({
-        swSrc: './src/src-sw.js',
-        swDest: './dist/serviceworker.js'
       })
-    ],
-
-    module: {
-      rules: [
-        
-      ],
-    },
+    ]
   };
 };
